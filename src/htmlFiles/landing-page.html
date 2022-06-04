@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <script>
+        function openSalesroom(salesroom, type) {
+            var url = "https://frontend-340522.de.r.appspot.com/" + type + "/:" + salesroom;
+            window.location=url;
+            //document.getElementById('salesroom').src = url;
+            //document.getElementsByClassName('salesroom-container').style="display:content";
+        }
+    </script>
+</head>
+
+<body>
+    <div class="salesroom-container">
+        <iframe id="salesroom" style="height:100%;width:100%"></iframe>
+    </div>
+
+    <div id="response" style="margin:0px;height:100%;width:100%">
+    </div>
+    <script>
+        $(document).ready(function () {
+            url = window.location.href.split('/');
+            $.ajax({
+                url: 'https://frontend-340522.de.r.appspot.com/landing-pages/get-landing-pages/' + url[url.length - 1],
+                method: 'GET',
+                type: 'GET',
+                success: function (data) {
+                    console.log("landing pages", data);
+                    $('#response').html(data.contents[0].contents);
+                }
+            });
+            //Salesroom open
+            $('#response').delegate('click', '#open-room', function () {
+                alert('salesroom open');
+            })
+        })
+    </script>
+</body>
+
+</html>

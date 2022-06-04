@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesroom-Basic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #f7f7f7;
+            background-image: url('bg.png');
+            background-position: bottom left;
+            background-size: 30%;
+            background-repeat: no-repeat;
+        }
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 2px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f7f7f7;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #f7f7f7;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f7f7f7;
+        }
+
+        .cta-btn {
+            width: 100%;
+            background-color: #1c67f3;
+            box-shadow: none;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .cta-btn-outline {
+            width: 100%;
+            background-color: #1c67f300;
+            color: #1c67f3;
+            border: 1px solid #1c67f3;
+            box-shadow: none;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .cta-btn-outline:hover {
+            background-color: #1c67f300;
+            color: #1c67f3;
+        }
+
+        .cta-btn:hover {
+            background-color: #1c67f3;
+        }
+        hr {
+            border: none;
+            border-top: 0.5px solid #c1c0c0;
+        }
+        .social-link {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #929292
+        }
+        .social-link:hover {
+            color: #1c67f3
+        }
+        .social-share {
+            margin-bottom: 20px;
+        }
+        .share-head {
+            color: #5f5f5f;
+            font-weight: 300;
+        }
+        .collection-item {
+            background-color: #f7f7f7 !important;
+            color: #5f5f5f !important;
+            border: none !important;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+        }
+        .collection-item:hover {
+            background-color: #dde9ff !important;
+            color: #1c67f3 !important;
+        }
+        .collection-item.active {
+            background-color: #dde9ff !important;
+            color: #1c67f3 !important;
+        }
+        .content-nav-icon {
+            margin-right: 10px;
+            float: left;
+        }
+        .content {
+            border: none;
+            width: 100%;
+            height: 300px;
+        }
+        .single-line {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .container1 {
+            width: 90% !important;
+        }
+        .sticky {
+            position: -webkit-sticky;
+            position: sticky;
+        }
+        .header {
+            color: #555555;
+        }
+        #loader {
+            position: absolute;
+            height: 100vh;
+            width: 100%;
+            z-index: 99;
+            background-color: #fff;
+            background-image: url('loading.gif');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 25%;
+            left: auto;
+            right: auto;
+        }
+        #content {
+            display: none;
+        }
+        .collection-item:hover {
+            cursor: pointer;
+        }
+        .event{
+            font-weight: 600;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .house-icon{
+            margin-right: 10px;
+        }
+        .event-card{
+            border-radius: 20px;
+        }
+        .card-event-image{
+            border-radius: 20px!important;
+            border-bottom-left-radius: 0px!important;
+            border-bottom-right-radius: 0px!important;
+        }
+        .modal2{
+            height: 1000px;
+            width: 600px;
+        }
+        
+        select{
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loader">
+    </div>
+    <div id='content' class="container container1">
+        <h1 style="color:#e9e9e9" class="title"></h1>
+        
+        <div class="row">
+            <!--Navigation-->
+            
+            <div class="col s3 sticky">
+                <!-- <p class="event"><i class="fa-solid house-icon fa-house"></i>Event</p> -->
+                
+                <b>Content Sections</b>
+                <div class="collection" style="border:none;border-right: 0.5px solid #cccccc;">
+                     
+                        <!-- <i class="material-icons content-nav-icon">apps</i><a class="event collection-item" style="padding-top: 0px;" >Event</a> -->
+                </div>
+            </div>
+            <!--Contents-->
+            <div class="col s6" style="height:100vh;overflow-y: scroll;padding:20px">
+                <div class="container container1">
+                    <b style="font-size:20px">
+                        <b class="header"><i class="material-icons content-nav-icon">apps</i><b
+                                id="content-title"></b></b>
+                    </b>
+                    
+                    <div id="contents">
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!--Sales Actions-->
+            <div class="col s3 sticky">
+                <b class="single-line">Salesroom for <b class="title"></b> </b>
+                <hr />
+                <b>Contact : </b>
+                <span class="sales_person"></span>
+                <!-- <video id="my-video" class="video-js" controls preload="auto"
+                    style="width:100%;height:auto;border-radius:5px;margin-top: 10px;" data-setup="{}">
+                    <source src="WhatsApp Video 2022-03-11 at 12.11.45 PM.mp4" type="video/mp4" />
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a
+                        web browser that
+                    </p>
+                </video> -->
+                <video controls id="video-source" style="width:100%;height:auto;border-radius:5px;margin-top: 10px;">
+                    
+                </video>
+                <a class="waves-effect waves-light btn modal-trigger cta-btn" href="#modal1">BOOK A MEETING</a>
+                <!-- <a class="waves-effect waves-light btn-small question cta-btn-outline"><i class="material-icons"
+                        style="float:left">chat_bubble_outline</i> Ask a question</a> -->
+                        <!-- <a class="waves-effect waves-light btn-small question modal-trigger cta-btn-outline" href="#modal2"><i class="material-icons"
+                            style="float:left">chat_bubble_outline</i> Ask a question</a>
+                            <div id="modal2" class="modal modal2">
+                                <div class="modal2-content">
+                                    <h3 class="center-align" >Question Form</h3>
+                                  <form class="col s12 center-align" id="form">
+                                        <div class="row" id="modal2-content">
+                                        </div>
+                                        
+                                        <button class="modal-close btn waves-effect waves-light" type="submit">submit</button>
+
+                                        </div>
+                                </div>
+                                
+                              </div> -->
+                <hr />
+                <b class="share-head">Share this room</b>
+                <div class="social-share" style="width:100%">
+                    <span class="mini">
+                        <a href="#" style="color:#1c67f3;font-size: 12px;"><i class="fa-solid fa-envelope"></i> Share
+                            via email</a>
+                    </span>
+                </div>
+                <b class="share-head">Social Medias</b>
+                <div class="social-share" style="width:100%">
+                    <a href="#" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-google"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="modal1" class="modal">
+        <div class="modal-content" style="padding:0px !important">
+            <div class="calendly-inline-widget" data-url="https://calendly.com/username"
+                style="min-width:320px;height:580px;">
+                <p class="calendy_username"></p>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                const link=window.location.href.split(':')[2]
+                console.log("link is",link);
+                
+                // const linkId="azaebj6kk6j"
+                // console.log("params",);
+                // LoadEvent=(eventName,data)=>{
+                //     console.log("data for event",data);                    
+                //     current_title = eventName;
+                //     current_content = '';                    
+                //     $('#content-title').html(current_title);
+                //     elements = ``;
+                //     console.log("current contents inside events ",current_content);
+                    
+                //         element = `
+                //         <div id="events">
+                //         <div class="card event-card">
+                //             <div class=" card-image">
+                //                 <img
+                //                 class="card-event-image"
+                //                 src="`+ data.thumbnail + `">
+                //                 <!-- <a href='`+ data.fileCdnLink + `' target='_blank' class="btn-floating halfway-fab waves-effect waves-light"
+                //                     style="background-color:#1c67f3">
+                //                     <i class="material-icons">cloud_download</i>
+                //                 </a> -->
+                //             </div>
+                //             <div class="card-content">
+                //                 <b>Sales Demo Live</b>
+                //                 <p>`+new Date(data.createdAt)+`  <a class="waves-effect waves-light btn cta-btn">Add to calender</a></p>
+                //                 <br>
+                //                 <p>Hosted By `+data.sales_person+`</p>
+                //                 <strong>tellselling.tech</strong>
+                //             </div>
+                //         </div>
+                //     </div>`;
+                //         elements += element;
+                    
+                //     $('#contents').html(element);
+
+                // }
+                // LoadQuestion=(fields)=>{
+                //     console.log("inside load question",fields);
+                //     elements = ``;
+                //     fields?.map((item)=>{
+                        
+                //     // console.log("items inside question:",item);
+                    
+                //         // element = `
+                //         // <label for="fname">`+item.label+`:</label>
+                //         // <input type="text" class="`+item.className+`" id="fname" name="fname">`;
+
+                //         if(item.type==="text")
+                //         {
+                //             element=`<div class="input-field col s8">
+                //             <label for="first_name">`+item.label+`</label>
+                //             <input type="text" id="first_name" type="text" name="`+item.label+`" class="validate">
+                //             </div>`
+                //         }
+                //         else if(item.type==="textarea"){
+                //             element=`<div class="input-field col s8">
+                //                 <label for="textarea1">`+item.label+`</label>
+                //                 <textarea id="textarea1" class="materialize-textarea" name="`+item.label+`"></textarea>          
+                //             </div>`
+                //         }
+                //         else if(item.type==="radio-group"){
+                //             element=`<div class="input-field col s8">
+                //             <p>`+item.label+`</p>
+                //             `+item.values?.map((i)=>`<p>
+                //               <label>
+                //                 <input name="group1" type="radio" checked name="`+item.label+`"/>
+                //                  <span>`+i.label+`</span>
+                //               </label>
+                //           </p>`)+`
+                //             </div>`
+                //         }
+                //         else if(item.type==="select"){
+                //             element=`
+                //             <div class="input-field col s8">
+                //          <select name="`+item.label+`">
+                //             <option value="" disabled selected>Choose your option</option>
+                //             `+item.values?.map((i)=>`<option value="`+i.value+`">`+i.label+`</option>`)+`
+                //      </select>                                          
+                //      </div>`
+                //         }
+                //         else if(item.type==="number"){
+                //             element=`
+                //             <div class="input-field col s8">
+                //                 <label for="number">`+item.label+`</label>
+                //                 <input type="number" id="number" name="`+item.label+`">
+                //      </div>`
+                //         }
+                //         elements += element;
+                //     })
+                //     $('#modal2-content').html(elements);
+
+                    
+                // }
+                LoadContents = (section_name) => {
+                    console.log("contents in contents",contents);
+                    current_title = '';
+                    current_content = [];
+                    contents.map((content, key) => {
+                        // console.log("contents inside contents map",content);
+                        content.contents.map((data)=>{
+                            if (content.section_name == section_name) {
+                            current_title = section_name;
+                            current_content.push(data);
+                            
+                        }
+                        console.log("current title",current_title,current_content);
+                        })                        
+                    })
+                    $('#content-title').html(current_title);
+                    elements = ``;
+                    // console.log("current contents",current_content);
+                    current_content.map((data, key) => {
+                        element = `
+                    <div class="card">
+                        <div class="card-image">
+                            <img
+                                src="`+ data.thumbnail + `">
+                            <a href='`+ data.fileCdnLink + `' target='_blank' class="btn-floating halfway-fab waves-effect waves-light"
+                                style="background-color:#1c67f3">
+                                <i class="material-icons">cloud_download</i>
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <b>`+ data.resourceTitle + `</b>
+                        </div>
+                    </div>`;
+                        elements += element;
+                    })
+                    $('#contents').html(elements);
+
+                }
+                M.AutoInit();
+                //$('.modal').modal('open');
+                // link = "5gkfuye0x3f";
+                
+                
+                contents = [];
+                allData=[]
+                current_content = [];
+                current_title = "";
+                //making the link
+                // url = "http://localhost:5000/salesroom-webinar/" + link + "/" + link;
+                https://frontend-340522.de.r.appspot.com/salesroom-web/:f728dshbd04
+                url = `https://frontend-340522.de.r.appspot.com/salesroom/${link}`;
+                // data={"_id":"61f7cc20edcb5a04397fc85c","tenantId":"61c22f881a9bd3199b674d24","title":"Test Basic Salesroom","thumbnail":"https://res.cloudinary.com/tellselling/image/upload/v1643828210/wb0r0stztirtepempmpw.jpg","description":"Test Salesroom Demo","tags":[],"link":"04nhtufgo5jl","contents":[{"section_name":"Test","contents":[{"_id":"61efd29eaeb2305587c9a75d","tenantId":"61c22f881a9bd3199b674d24","resourceTitle":"Medical","fileType":"image","fileCdnLink":"http://res.cloudinary.com/tellselling/image/upload/v1643106973/gej23ettjigcankig8wv.png","thumbnail":"http://res.cloudinary.com/tellselling/image/upload/v1643106973/ogqhky5f95clz2vq8poi.png","resourceCategory":"","tags":[{"label":"upcomings","value":"upcomings"}],"categories":[{"label":"Marketing","value":"Marketing"}],"content_areas":[{"label":"Europe","value":"Europe"},{"label":"MiddleEast","value":"MiddleEast"},{"label":"Asia","value":"Asia"}],"external_internal":["Internal"],"internal_use":[{"label":"Budgets","value":"Budgets"}],"createdBy":"Utpalendu Barman","sharedBy":[],"viewedBy":[],"createdAt":"2022-01-25T10:36:14.139Z","updatedAt":"2022-01-25T10:36:14.139Z","__v":0,"private_public":["Public"]},{"_id":"61f385ec83dfc0193f846a86","tenantId":"61c22f881a9bd3199b674d24","resourceTitle":"Iphone-12","fileType":"image","fileCdnLink":"http://res.cloudinary.com/tellselling/image/upload/v1643349485/rkt4q38smgvgfh2jjhlr.jpg","thumbnail":"http://res.cloudinary.com/tellselling/image/upload/v1643349484/cd2m7zsyg4nny4c8qlsy.jpg","resourceCategory":"","tags":[{"label":"upcomings","value":"upcomings"}],"categories":[{"label":"Marketing","value":"Marketing"}],"content_areas":[{"label":"Europe","value":"Europe"}],"external_internal":["Internal"],"private_public":["Public"],"internal_use":[{"label":"Budgets","value":"Budgets"}],"createdBy":"Priyanshu M Shah","sharedBy":[],"viewedBy":[],"createdAt":"2022-01-28T05:58:04.642Z","updatedAt":"2022-01-28T17:48:34.251Z","__v":0}]},{"section_name":"Marketing","contents":[{"_id":"61efd29eaeb2305587c9a75d","tenantId":"61c22f881a9bd3199b674d24","resourceTitle":"Medical","fileType":"image","fileCdnLink":"http://res.cloudinary.com/tellselling/image/upload/v1643106973/gej23ettjigcankig8wv.png","thumbnail":"http://res.cloudinary.com/tellselling/image/upload/v1643106973/ogqhky5f95clz2vq8poi.png","resourceCategory":"","tags":[{"label":"upcomings","value":"upcomings"}],"categories":[{"label":"Marketing","value":"Marketing"}],"content_areas":[{"label":"Europe","value":"Europe"},{"label":"MiddleEast","value":"MiddleEast"},{"label":"Asia","value":"Asia"}],"external_internal":["Internal"],"internal_use":[{"label":"Budgets","value":"Budgets"}],"createdBy":"Utpalendu Barman","sharedBy":[],"viewedBy":[],"createdAt":"2022-01-25T10:36:14.139Z","updatedAt":"2022-01-25T10:36:14.139Z","__v":0,"private_public":["Public"]}]}],"prospects":[{"email":"badhanbarman@gmail.com","first_name":"Utpalendu","last_name":"Barman","deal_name":"Utpalendu Barman","organization":"Test","amount":"300"}],"welcome_message":{"type":"video","url":"http://res.cloudinary.com/tellselling/video/upload/v1643629581/gl5h08u4srekscninuhj.mkv"},"cta":"[]","sales_person":"Utpalendu Barman","__v":0}
+                // contents=data.contents;
+                // console.log("contents are",contents);
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    method: 'GET',
+                    success: function (data) {                        
+                        console.log("data inside ajax",data);
+                        $('#loader').hide();
+                        $('#content').fadeIn(1500);
+                        allData = data
+                        // LoadEvent("Event",allData);
+                        {
+                            console.log("contents call");
+                            LoadContents(data.contents[0].section_name);
+                        }
+                        
+                        if(allData.cta.length>2){
+                            
+                            cta=JSON.parse(allData.cta)[0].link.split('/')
+                            console.log("cta",cta[3]);
+                            $('.calendy_username').html(`<h5 class="center">Username:- `+cta[3]+`</h5>`);
+                        }
+                        //fetching contents
+                        // contents = data.contents;
+                        // setting video source
+                        source=`<source src="`+allData?.welcome_message.url+`" id="video-source" type='video/webm' />`
+                        $('#video-source').html(source)
+                        //setting title
+                        $('.title').html(allData.title);
+                        $('.sales_person').html(allData.sales_person);
+                        //making sections
+                        
+                        data.contents.map((item)=>{
+                            console.log("data is",item);
+                            contents.push(item)
+                        })
+                        if(data.contents.length!=0)
+                        {
+                            console.log("contents call");
+                            LoadContents(data.contents[0].section_name);
+                        }
+                        // console.log("inside ajax",contents);
+                        console.log("section name",contents[0].section_name);
+                        contents.map((content, key) => {
+                            // if (key == 0) {
+                            //     LoadContents(contents);
+                            // }
+                            // console.log("contents name",content.section_name);
+                            element = `
+                        <a class="collection-item" style="padding-left: 0px;"data-section="`+ content.section_name + `" > 
+                            <i class="material-icons content-nav-icon">apps</i>`
+                                + content.section_name +
+                                `</a>`;
+                            $('.collection').append(element);
+                        });
+                        $('#content-title').html(current_title);
+                        $('#contents').html(elements);
+
+                      }
+                })
+                // var form = document.getElementById('form')
+                // form.addEventListener('submit',(event)=>{
+                //     event.preventDefault()
+                //     // console.log("inside form submit",(event.target[1]));
+                //     //form handling
+                //     let guestData={}
+                //     allData.question.map((item)=>{
+                //         // console.log("labels are",item.label);
+                //         var text = document.getElementsByName(item.label)  
+                //         let name = text[0].name;
+                //         let value = text[0].value    
+                //         let obj={}
+                //         if(name=="First Name"){
+                //             name="First_Name"
+                //         }
+                //         else if(name=="Last Name"){
+                //             name="Last_Name"
+                //         }
+                //         obj[name] = value
+                //         guestData={...guestData,...obj}
+                //     })
+                //     console.log("guest data",guestData);
+
+                //     $.post("http://localhost:5000/salesroom-webinar/update-guest",{guestData:guestData,link:link},function(data){
+                //             console.log('data inside callback',data);
+                //             window.alert("question successfully created");
+                //     });
+                // })
+                $('body').delegate('.collection-item', 'click', function () {
+                    section_name = $(this).attr('data-section');
+                    console.log("content click",section_name);
+                    LoadContents(section_name);
+                });
+                // $('body').delegate('.event', 'click', function () {
+                //     section_name = $(this)[0].outerText;
+                //     // console.log("event click",section_name);
+                //     LoadEvent(section_name,allData);
+
+                // });
+                $('body').delegate('.question', 'click', function () {
+                    LoadQuestion(allData.question)
+                });
+                
+            })
+        </script>
+
+
+
+    </div>
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
